@@ -1,1 +1,2 @@
-# Unidad2POO
+# Practicas ReactJS
+# Proyecto para practicar React.
