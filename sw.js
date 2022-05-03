@@ -7,7 +7,7 @@ const CACHE_ELEMENTS = [
     "./app.js"
 ];
 
-const CACHE_NAME = "v1_cache_contadorReact";
+const CACHE_NAME = "v2_cache_contadorReact";
 
 self.addEventListener("install", (e) => {
     e.waitUntil(
@@ -19,5 +19,16 @@ self.addEventListener("install", (e) => {
             })
             .catch(console.log);
         })
-    )
-})
+    );
+});
+
+self.addEventListener("activate", (e) => {
+    const cacheWhiteList = [CACHE_NAME];
+
+
+    e.waitUntil(
+        caches.keys().then((cacheNames) => {
+            console.log(cacheNames);
+        })
+    );
+});

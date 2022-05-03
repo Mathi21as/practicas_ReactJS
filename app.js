@@ -1,5 +1,5 @@
 const Segundos = () => {
-    const [contador, setContador] = React.useState(0);
+    const [contador, setContador] = React.useState(1);
 
     const aumentar = () => setContador(contador + 1)
     const disminuir = () => setContador(contador - 1)
