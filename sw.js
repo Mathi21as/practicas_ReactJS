@@ -31,6 +31,6 @@ self.addEventListener("activate", (e) => {
             return Promise.all(cacheNames.map(cacheName => {
                 cacheWhiteList.indexOf(cacheName) === -1 && caches.delete(cacheName);
             }))
-        })
+        }).then(() => self.clients.claim())
     );
 });
