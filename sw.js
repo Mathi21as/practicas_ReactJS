@@ -7,7 +7,7 @@ const CACHE_ELEMENTS = [
     "./app.js"
 ];
 
-const CACHE_NAME = "v2_cache_contadorReact";
+const CACHE_NAME = "v3_cache_contadorReact";
 
 self.addEventListener("install", (e) => {
     e.waitUntil(
@@ -17,15 +17,13 @@ self.addEventListener("install", (e) => {
             .then(() => {
                 self.skipWaiting ();
             })
-            .catch(console.log);
+            .catch((err) => {console.log(err)});
         })
     );
 });
 
 self.addEventListener("activate", (e) => {
     const cacheWhiteList = [CACHE_NAME];
-
-
     e.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(cacheNames.map(cacheName => {
@@ -34,3 +32,9 @@ self.addEventListener("activate", (e) => {
         }).then(() => self.clients.claim())
     );
 });
+
+self.addEventListener("fetch", (e) => {
+    e.respondWith(
+        caches.match(e.request).then((res) => res ? res : fetch(e.request))
+    )
+})
